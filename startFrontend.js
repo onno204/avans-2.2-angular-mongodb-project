@@ -3,11 +3,11 @@ const child_process = require('child_process');
 
 const config = dotenv.config()
 const env = process.env
-if (env.IS_BACKEND === 1) {
-    env.PORT = process.env.FRONTEND_PORT || 4200
-}else{
-    env.PORT = process.env.PORT || process.env.FRONTEND_PORT || 4200
+console.log("asd:", env.IS_BACKEND)
+if (env.IS_BACKEND === "1") {
+    return false;
 }
+env.PORT = process.env.PORT || process.env.FRONTEND_PORT || 4200
 
 const child = child_process.exec(`cd Frontend && npm run start`, {env: env});
 child.stderr.on('data', err => console.error(err));

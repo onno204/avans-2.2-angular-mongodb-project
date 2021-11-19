@@ -3,7 +3,7 @@ const child_process = require('child_process');
 
 const config = dotenv.config()
 const env = process.env
-if (env.IS_BACKEND === 1) {
+if (env.IS_BACKEND === "1") {
     env.PORT = process.env.PORT || process.env.BACKEND_PORT || 8080
 }else{
     env.PORT = process.env.BACKEND_PORT || 8080
