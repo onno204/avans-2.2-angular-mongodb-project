@@ -19,8 +19,7 @@ app.use(cors())
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-app.use(bodyParser.json());
-
+app.use(bodyParser.json({limit: '50mb'}));
 
 app.get('/', (req, res) => res.send('Hello World for avans-app API'));
 app.use('/api/v1', require("./api-routes"))

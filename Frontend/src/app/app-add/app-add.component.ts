@@ -25,11 +25,25 @@ export class AppAddComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  handleFileSelect(evt: any){
+    const files = evt.target.files;
+    const file = files[0];
+    if (files && file) {
+      const reader = new FileReader();
+      reader.onload =this._handleReaderLoaded.bind(this);
+      reader.readAsBinaryString(file);
+    }
+  }
+
+  _handleReaderLoaded(readerEvt: any) {
+    const binaryString = readerEvt.target.result;
+    this.appData.icon = "data:image/png;base64," + btoa(binaryString);
+  }
+
   addProduct(): void {
-    console.log("sending:", this.appData)
     this.rest.addApp(this.appData).subscribe((res) => {
       if (res.success) {
-        this.router.navigate(['/app-details/' + res._id]);
+        this.router.navigate(['/app-details/' + res.data._id]);
       } else {
         Swal.fire({
           title: 'Error!',

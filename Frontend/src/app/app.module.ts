@@ -9,6 +9,7 @@ import { AppListComponent } from './app-list/app-list.component';
 import { AppAddComponent } from './app-add/app-add.component';
 import { AppDetailsComponent } from './app-details/app-details.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     AppListComponent,
     AppAddComponent,
     AppDetailsComponent,
-    NavbarComponent
+    NavbarComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

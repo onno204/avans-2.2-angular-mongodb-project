@@ -7,6 +7,11 @@
     <div id="emailHelp" class="form-text">Your app name must be unique.</div>
   </div>
   <div class="mb-3">
+    <label class="form-label">Icon</label>
+    <input (change)="handleFileSelect($event)" class="form-control" type="file" accept="image/*" placeholder="Upload your app icon"/>
+    <img [src]="appData.icon" style="max-height: 6rem;" class="img-thumbnail" alt="Waiting for image">
+  </div>
+  <div class="mb-3">
     <label class="form-label">Description</label>
     <input [(ngModel)]="appData.description" class="form-control" placeholder="Use this app to chat privatly with your friends"/>
   </div>
@@ -16,7 +21,7 @@
   </div>
   <div class="mb-3 form-check">
     <input [(ngModel)]="appData.public" type="checkbox" class="form-check-input" id="publicCheckbox">
-    <label class="form-check-label" for="publicCheckbox">Check me out</label>
+    <label class="form-check-label" for="publicCheckbox">Publicly visible</label>
   </div>
   <button (click)="addProduct()" class="btn btn-primary">Save</button>
 </div>

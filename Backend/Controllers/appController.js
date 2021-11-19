@@ -22,7 +22,7 @@ exports.new = function (req, res) {
     }
     // save the app and check for errors
     app.save(function (err) {
-        if (err) {
+        if (err && Object.values(err).length > 0) {
             return res.status(400).json({
                 success: false,
                 data: err
