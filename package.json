@@ -8,7 +8,7 @@
     "clientdev": "cd Frontend && npm run start",
     "server": "cd Backend && npm i && npm run start",
     "serverdev": "cd Backend && npm run dev",
-    "start": " .\\node_modules\\.bin\\concurrent \"npm run client\" \"npm run server\"",
+    "start": "concurrent \"npm run client\" \"npm run server\"",
     "dev": " .\\node_modules\\.bin\\concurrent \"npm run clientdev\" \"npm run serverdev\""
   },
   "dependencies": {
