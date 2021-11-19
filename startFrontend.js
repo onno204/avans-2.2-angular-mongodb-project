@@ -3,8 +3,8 @@ const child_process = require('child_process');
 
 const config = dotenv.config()
 const env = process.env
-console.log("asd:", env.IS_BACKEND)
 if (env.IS_BACKEND === "1") {
+    //Frontend doesn't need to run in production
     return false;
 }
 env.PORT = process.env.PORT || process.env.FRONTEND_PORT || 4200
