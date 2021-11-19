@@ -26,6 +26,7 @@ export class AppAddComponent implements OnInit {
   }
 
   addProduct(): void {
+    console.log("sending:", this.appData)
     this.rest.addApp(this.appData).subscribe((res) => {
       if (res.success) {
         this.router.navigate(['/app-details/' + res._id]);

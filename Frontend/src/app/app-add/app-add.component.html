@@ -1,19 +1,22 @@
-<div>
+<div class="row">
   <h2>Product Add</h2>
-  <div>
-    <label>App Name:
-      <input [(ngModel)]="appData.name" placeholder="Product Name"/>
-    </label>
-    <br>
-    <label>App Desc:
-      <input [(ngModel)]="appData.description" placeholder="Product Description"/>
-    </label>
-    <br>
-    <label>App Price:
-      <input [(ngModel)]="appData.category" placeholder="Product Price"/>
-    </label>
-    <br>
+
+  <div class="mb-3">
+    <label class="form-label">App Name</label>
+    <input [(ngModel)]="appData.name" class="form-control" placeholder="Whatsapp">
+    <div id="emailHelp" class="form-text">Your app name must be unique.</div>
   </div>
-  public
-  <button (click)="addProduct()">Save</button>
+  <div class="mb-3">
+    <label class="form-label">Description</label>
+    <input [(ngModel)]="appData.description" class="form-control" placeholder="Use this app to chat privatly with your friends"/>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Category</label>
+    <input [(ngModel)]="appData.category" class="form-control" placeholder="Communication"/>
+  </div>
+  <div class="mb-3 form-check">
+    <input [(ngModel)]="appData.public" type="checkbox" class="form-check-input" id="publicCheckbox">
+    <label class="form-check-label" for="publicCheckbox">Check me out</label>
+  </div>
+  <button (click)="addProduct()" class="btn btn-primary">Save</button>
 </div>

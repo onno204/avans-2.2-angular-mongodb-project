@@ -17,10 +17,9 @@ exports.index = function (req, res) {
 
 exports.new = function (req, res) {
     const app = new App();
-    app.name = req.body.name ? req.body.name : app.name;
-    app.gender = req.body.gender;
-    app.email = req.body.email;
-    app.phone = req.body.phone;
+    for (const [key, value] of Object.entries(req.body)) {
+        app[key] = value
+    }
     // save the app and check for errors
     app.save(function (err) {
         if (err) {
