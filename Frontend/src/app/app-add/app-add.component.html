@@ -1,15 +1,19 @@
 <div>
   <h2>Product Add</h2>
   <div>
-    <label>Product Name:
-      <input [(ngModel)]="appData.prod_name" placeholder="Product Name"/>
-    </label><br>
-    <label>Product Desc:
-      <input [(ngModel)]="appData.prod_desc" placeholder="Product Description"/>
-    </label><br>
-    <label>Product Price:
-      <input [(ngModel)]="appData.prod_price" placeholder="Product Price"/>
-    </label><br>
+    <label>App Name:
+      <input [(ngModel)]="appData.name" placeholder="Product Name"/>
+    </label>
+    <br>
+    <label>App Desc:
+      <input [(ngModel)]="appData.description" placeholder="Product Description"/>
+    </label>
+    <br>
+    <label>App Price:
+      <input [(ngModel)]="appData.category" placeholder="Product Price"/>
+    </label>
+    <br>
   </div>
+  public
   <button (click)="addProduct()">Save</button>
 </div>

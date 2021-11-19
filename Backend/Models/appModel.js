@@ -13,6 +13,7 @@ const appSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    public: Boolean,
     downloadCount: Number,
     icon: String,
     pictures: Array

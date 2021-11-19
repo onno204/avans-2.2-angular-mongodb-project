@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { RestService } from '../rest.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import {RestService} from '../rest.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-app-add',
@@ -10,9 +11,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AppAddComponent implements OnInit {
   title = 'App details';
 
-  @Input() appData = { prod_name: '', prod_desc: '', prod_price: 0 };
+  @Input() appData = {
+    name: "",
+    description: "",
+    category: "",
+    public: false,
+    icon: ""
+  };
 
-  constructor(public rest: RestService, private route: ActivatedRoute, private router: Router) { }
+  constructor(public rest: RestService, private route: ActivatedRoute, private router: Router) {
+  }
 
   ngOnInit(): void {
   }
@@ -21,8 +29,13 @@ export class AppAddComponent implements OnInit {
     this.rest.addApp(this.appData).subscribe((res) => {
       if (res.success) {
         this.router.navigate(['/app-details/' + res._id]);
-      }else{
-        console.log(":(")
+      } else {
+        Swal.fire({
+          title: 'Error!',
+          html: res.data.message.replaceAll(".,", ".<br>"),
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        })
       }
     });
   }
