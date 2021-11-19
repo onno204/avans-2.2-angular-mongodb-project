@@ -9,9 +9,10 @@
     "client": "node startFrontend.js",
     "clientdev": "cd Frontend && npm run serve",
     "server": "node startBackend.js",
+    "serverdev2": "node startBackendDev.js",
     "serverdev": "cd Backend && npm run dev",
     "start": "concurrent \"npm run client\" \"npm run server\"",
-    "dev": " .\\node_modules\\.bin\\concurrent \"npm run clientdev\" \"npm run serverdev\""
+    "dev": " .\\node_modules\\.bin\\concurrent \"npm run clientdev\" \"npm run serverdev2\""
   },
   "dependencies": {
     "concurrently": "^1.0.0",
