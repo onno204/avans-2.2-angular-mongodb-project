@@ -5,6 +5,6 @@ const config = dotenv.config()
 const env = process.env
 env.PORT = process.env.PORT || process.env.FRONTEND_PORT || 4200
 
-const child = child_process.exec(`cd Frontend && npm run start`, {env: env});
+const child = child_process.exec(`cd Frontend && npm run serve -- --PORT=${env.PORT}`, {env: env});
 child.stderr.on('data', err => console.error(err));
 child.stdout.on('data', data => console.log(data.toString()));
