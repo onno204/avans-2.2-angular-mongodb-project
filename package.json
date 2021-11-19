@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "client": "cd Backend && npm start",
-    "server": "cd Frontend && npm start",
-    "serverdev": "cd Frontend && npm watch",
+    "client": "cd Frontend && npm run start",
+    "clientdev": "cd Frontend && npm run start",
+    "server": "cd Backend && npm run start",
+    "serverdev": "cd Backend && npm run dev",
     "start": " .\\node_modules\\.bin\\concurrent \"npm run client\" \"npm run server\"",
-    "dev": " .\\node_modules\\.bin\\concurrent \"npm run client\" \"npm run server\""
+    "dev": " .\\node_modules\\.bin\\concurrent \"npm run clientdev\" \"npm run serverdev\""
   },
   "dependencies": {
     "concurrently": "^1.0.0"

@@ -1,8 +1,11 @@
 require('dotenv').config()
 
 const express = require('express')
+const cors = require('cors')
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+
+const serverPort = process.env.PORT || 8080;
 
 mongoose.connect(process.env.DB_STRING, { useNewUrlParser: true}, () => {});
 const db = mongoose.connection;
@@ -12,9 +15,7 @@ if (!db) {
 }
 
 const app = express();
-const serverPort = process.env.PORT || 8080;
-
-
+app.use(cors())
 app.use(bodyParser.urlencoded({
     extended: true
 }));

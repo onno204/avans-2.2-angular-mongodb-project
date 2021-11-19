@@ -1,7 +1,7 @@
 const router = require('express').Router();
 router.get('/', function (req, res) {
     res.json({
-        status: 'The API Is Working',
+        success: false,
         message: 'Welcome to the avans-app API!'
     });
 });

@@ -5,12 +5,17 @@ const appSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    email: {
+    description: {
         type: String,
         required: true
     },
-    comments: Object,
-    phone: String
+    category: {
+        type: String,
+        required: true
+    },
+    downloadCount: Number,
+    icon: String,
+    pictures: Array
 
 }, { timestamps: true });
 
