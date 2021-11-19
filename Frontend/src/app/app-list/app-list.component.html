@@ -4,6 +4,8 @@
 <div class="row mt-2 text-center">
   <div class="col-sm-4" *ngFor="let p of apps; let i=index;">
     <div class="card">
+      <div class="ribbon-corner ribbon-fold">{{p.category}}</div>
+      <div *ngIf="!p.public" class="ribbon-bookmark-h" data-tor="place.left place.top" title="Hidden"><i class="fa-solid fa-eye-slash"></i></div>
       <img class="card-img-top" alt="app-icon" src="{{p.icon}}">
       <div class="card-body">
         <h5 class="card-title">{{p.name}}</h5>
