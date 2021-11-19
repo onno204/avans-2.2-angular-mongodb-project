@@ -4,7 +4,7 @@
   "description": "",
   "main": "startFrontend.js",
   "scripts": {
-    "client": "cd Frontend && npm i && cd .. && node startFrontend.js",
+    "client": "cd Frontend && npm i && cd .. && npm install -g @angular/cli && node startFrontend.js",
     "clientdev": "cd Frontend && npm run start",
     "server": "cd Backend && npm i && cd .. && node startBackend.js",
     "serverdev": "cd Backend && npm run dev",
