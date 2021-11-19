@@ -21,10 +21,10 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
-app.get('/', (req, res) => res.send('Hello World with Express'));
+app.get('/', (req, res) => res.send('Hello World for avans-app API'));
 app.use('/api/v1', require("./api-routes"))
 
 
 app.listen(serverPort, function () {
-    console.log("Running RestHub on http://127.0.0.1:" + serverPort);
+    console.log("Running avans-app API on http://127.0.0.1:" + serverPort);
 });

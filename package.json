@@ -1,0 +1,26 @@
+{
+  "name": "avans-2.2-angular-mongodb-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "client": "cd Backend && npm start",
+    "server": "cd Frontend && npm start",
+    "serverdev": "cd Frontend && npm watch",
+    "start": " .\\node_modules\\.bin\\concurrent \"npm run client\" \"npm run server\"",
+    "dev": " .\\node_modules\\.bin\\concurrent \"npm run client\" \"npm run server\""
+  },
+  "dependencies": {
+    "concurrently": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onno204/avans-2.2-angular-mongodb-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/onno204/avans-2.2-angular-mongodb-project/issues"
+  },
+  "homepage": "https://github.com/onno204/avans-2.2-angular-mongodb-project#readme"
+}
