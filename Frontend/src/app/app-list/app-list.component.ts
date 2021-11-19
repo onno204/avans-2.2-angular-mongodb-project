@@ -18,10 +18,10 @@ export class AppListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getProducts();
+    this.getApps();
   }
 
-  getProducts(): void {
+  getApps(): void {
     this.rest.getApps().subscribe((res) => {
       if (res.success) {
         this.apps = res.data;
@@ -32,12 +32,4 @@ export class AppListComponent implements OnInit {
   add(): void {
     this.router.navigate(['/app-add']);
   }
-
-  delete(id: string): void {
-    this.rest.deleteApp(id).subscribe((res) => {
-        this.getProducts();
-      }
-    );
-  }
-
 }

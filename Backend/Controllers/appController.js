@@ -52,12 +52,16 @@ exports.view = function (req, res) {
 
 exports.update = function (req, res) {
     App.findById(req.params.app_id, function (err, app) {
-        if (err)
-            res.send(err);
-        app.name = req.body.name ? req.body.name : app.name;
-        app.gender = req.body.gender;
-        app.email = req.body.email;
-        app.phone = req.body.phone;
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                data: err
+            });
+        }
+        delete req.body._id;
+        for (const [key, value] of Object.entries(req.body)) {
+            app[key] = value
+        }
 
         app.save(function (err) {
             if (err) {

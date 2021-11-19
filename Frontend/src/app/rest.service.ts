@@ -30,8 +30,8 @@ export class RestService {
     );
   }
 
-  addApp(product: any): Observable<any> {
-    return this.http.post(endpoint + 'apps', product).pipe(
+  addApp(app: any): Observable<any> {
+    return this.http.post(endpoint + 'apps', app).pipe(
       map(RestService.extractData),
       catchError(RestService.handleError)
     );

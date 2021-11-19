@@ -4,5 +4,14 @@
   <div class="col-md-6">
     <img [src]="appData.icon" style="max-height: 10rem;" class="img-thumbnail" alt="Waiting for image">
   </div>
-  <h5>Details of {{appData.description}}</h5>
+  <div class="col-md-6">
+    <p>Aangemaakt op {{appData.createdAt | date:'full'}}</p>
+    <a [routerLink]="['/app-update', appData._id]" class="col-md-4 btn btn-primary">App aanpassen</a>
+    <a  (click)="deleteApp()" style="float: right" class="col-md-4 btn btn-danger">App verwijderen</a>
+  </div>
+
+  <h4 class="mt-4">Description</h4>
+  <p>{{appData.description}}</p>
+  <h4>Categorie</h4>
+  <p>{{appData.category}}</p>
 </div>

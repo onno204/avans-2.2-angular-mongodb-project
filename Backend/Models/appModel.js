@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const appSchema = mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     description: {
         type: String,
@@ -15,7 +16,10 @@ const appSchema = mongoose.Schema({
     },
     public: Boolean,
     downloadCount: Number,
-    icon: String,
+    icon: {
+        type: String,
+        required: true
+    },
     pictures: Array
 
 }, { timestamps: true });

@@ -40,7 +40,7 @@ export class AppAddComponent implements OnInit {
     this.appData.icon = "data:image/png;base64," + btoa(binaryString);
   }
 
-  addProduct(): void {
+  addApp(): void {
     this.rest.addApp(this.appData).subscribe((res) => {
       if (res.success) {
         this.router.navigate(['/app-details/' + res.data._id]);

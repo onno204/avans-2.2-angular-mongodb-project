@@ -10,6 +10,7 @@ import { AppAddComponent } from './app-add/app-add.component';
 import { AppDetailsComponent } from './app-details/app-details.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AboutComponent } from './about/about.component';
+import { AppUpdateComponent } from './app-update/app-update.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AboutComponent } from './about/about.component';
     AppAddComponent,
     AppDetailsComponent,
     NavbarComponent,
-    AboutComponent
+    AboutComponent,
+    AppUpdateComponent
   ],
   imports: [
     BrowserModule,
