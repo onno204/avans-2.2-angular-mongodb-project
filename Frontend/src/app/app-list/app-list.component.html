@@ -14,6 +14,10 @@
       </div>
     </div>
   </div>
+</div>
+<div class="row text-center">
+  <button *ngIf="hasMore" (click)="getApps()" class="center-self col-md-3 btn btn-outline-primary">Load more</button>
+
   <button (click)="add()" class="col-md-12 mt-3 btn btn-primary">
     Create a new app
   </button>

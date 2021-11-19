@@ -16,8 +16,8 @@ export class RestService {
   constructor(private http: HttpClient) {
   }
 
-  getApps(): Observable<any> {
-    return this.http.get(endpoint + 'apps').pipe(
+  getApps(page: number): Observable<any> {
+    return this.http.get(endpoint + 'apps?page=' + page).pipe(
       map(RestService.extractData),
       catchError(RestService.handleError)
     );

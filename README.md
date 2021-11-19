@@ -18,7 +18,11 @@ Deployments gaat via 2 servers, 1 frontend en 1 backend server.
 3. Commit to git
 4. _de Heroku pipeline moet nu automatisch de frontend deployen_
 
+Frontend deployed naar: https://avans-app-2-2.herokuapp.com/
+
 #####Backend deployment
 1. "Copy" de .env variables naar de server.
 2. Zorg ervoor de in de .env de `IS_BACKEND=1` op `1` staat. Dit zorgt ervoor dat de backend op de publieke Heroku poort draait.
 3. Aangezien Heroku maar 1 build tegelijkertijd kan moet je deze handmatig deployen.
+
+Backend deployed naar: https://avans-app-2-2-backend.herokuapp.com/

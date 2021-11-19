@@ -11,6 +11,8 @@ export class AppListComponent implements OnInit {
   title = 'Apps list';
 
   apps: any[] = [];
+  page: number = -1;
+  hasMore: Boolean = true;
 
   constructor(
     public rest: RestService,
@@ -22,9 +24,11 @@ export class AppListComponent implements OnInit {
   }
 
   getApps(): void {
-    this.rest.getApps().subscribe((res) => {
+    this.page += 1;
+    this.rest.getApps(this.page).subscribe((res) => {
       if (res.success) {
-        this.apps = res.data;
+        this.apps = this.apps.concat(res.data);
+        this.hasMore = res.hasMore
       }
     });
   }

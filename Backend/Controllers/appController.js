@@ -1,18 +1,24 @@
 App = require('./../Models/appModel');
 
 exports.index = function (req, res) {
-    App.get(function (err, req) {
-        if (err) {
-            return res.status(400).json({
-                success: false,
-                data: err
+    const page = req.query.page || 0;
+    const pageSize = 2;
+    App.count(function (err, count) {
+
+        App.find(function (err, req) {
+            if (err) {
+                return res.status(400).json({
+                    success: false,
+                    data: err
+                });
+            }
+            res.status(200).json({
+                success: true,
+                data: req,
+                hasMore: count > ((pageSize * page) + pageSize)
             });
-        }
-        res.status(200).json({
-            success: true,
-            data: req
-        });
-    });
+        }).skip(pageSize * page).limit(pageSize);
+    })
 };
 
 exports.new = function (req, res) {
