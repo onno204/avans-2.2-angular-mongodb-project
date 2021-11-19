@@ -7,8 +7,9 @@ Voor de backend van deze app is MongoDB in met express(NodeJS) gebruikt.
 
 ###Development server starten
 1. Copy-paste `.env.example` naar `.env`
-2. Start de development omgeving met `npm run dev`, dit start zowel de frontend als backend.
-3. Start met development
+2. Build alles met `npm run build`
+3. Start de development omgeving met `npm run dev`, dit start zowel de frontend als backend.
+4. Start met development
 
 ###Deployments
 Deployments gaat via 2 servers, 1 frontend en 1 backend server.
