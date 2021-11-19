@@ -8,14 +8,14 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./app-details.component.scss']
 })
 export class AppDetailsComponent implements OnInit {
-  product: any;
+  appData: any;
 
   constructor(public rest: RestService, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit(): void {
     this.rest.getApp(this.route.snapshot.params['id']).subscribe(
-      (data) => this.product = {...data}
+      (res) => this.appData = {...res.data}
     );
   }
 

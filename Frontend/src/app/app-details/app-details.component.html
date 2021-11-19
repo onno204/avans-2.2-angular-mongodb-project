@@ -1,1 +1,7 @@
-<p>app-details works!</p>
+<div *ngIf="appData" class="row">
+  <h2>Details of {{appData.name}}</h2>
+
+  <div class="col-md-6">
+    <img [src]="appData.icon" style="max-height: 10rem;" class="img-thumbnail" alt="Waiting for image">
+  </div>
+</div>

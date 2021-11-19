@@ -25,31 +25,35 @@ export class RestService {
 
   getApp(id: string): Observable<any> {
     return this.http.get(endpoint + 'apps/' + id).pipe(
+      map(RestService.extractData),
       catchError(RestService.handleError)
     );
   }
 
   addApp(product: any): Observable<any> {
     return this.http.post(endpoint + 'apps', product).pipe(
+      map(RestService.extractData),
       catchError(RestService.handleError)
     );
   }
 
   updateApp(id: string, app: Object): Observable<any> {
     return this.http.put(endpoint + 'apps/' + id, app).pipe(
+      map(RestService.extractData),
       catchError(RestService.handleError)
     );
   }
 
   deleteApp(id: string): Observable<any> {
     return this.http.delete(endpoint + 'apps/' + id).pipe(
+      map(RestService.extractData),
       catchError(RestService.handleError)
     );
   }
 
   private static extractData(res: Object): any {
     console.log("incomming:", res)
-    return res || {};
+    return res || { success: false, message: "unknown error" };
   }
 
   private static handleError(error: any): any {
