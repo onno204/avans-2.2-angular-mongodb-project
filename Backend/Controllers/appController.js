@@ -2,7 +2,7 @@ App = require('./../Models/appModel');
 
 exports.index = function (req, res) {
     const page = req.query.page || 0;
-    const pageSize = 2;
+    const pageSize = 5;
     App.count(function (err, count) {
 
         App.find(function (err, req) {
