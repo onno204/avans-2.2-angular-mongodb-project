@@ -15,6 +15,7 @@ export class AppDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("params: ", this.route.snapshot.params)
     this.rest.getApp(this.route.snapshot.params['id']).subscribe(
       (res) => {
         this.appData = {...res.data}

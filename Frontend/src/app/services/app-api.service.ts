@@ -23,6 +23,13 @@ export class AppApiService {
     );
   }
 
+  getAllApps(): Observable<any> {
+    return this.http.get(endpoint + 'apps?nolimit=1').pipe(
+      map(AppApiService.extractData),
+      catchError(AppApiService.handleError)
+    );
+  }
+
   getApp(id: string): Observable<any> {
     return this.http.get(endpoint + 'apps/' + id).pipe(
       map(AppApiService.extractData),
@@ -52,12 +59,12 @@ export class AppApiService {
   }
 
   private static extractData(res: Object): any {
-    console.log("incomming:", res)
+    // console.log("incomming:", res)
     return res || { success: false, message: "unknown error" };
   }
 
   private static handleError(error: any): any {
-    console.error(error.status, error.error)
+    // console.error(error.status, error.error)
     if (error.error){
       // return error.error
       return of(error.error)

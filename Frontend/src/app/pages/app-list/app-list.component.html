@@ -3,12 +3,12 @@
 
 <div class="row mt-2 text-center">
   <div class="col-sm-4" *ngFor="let p of apps; let i=index;">
-    <div class="card">
+    <div class="card" id="{{p._id}}">
       <div class="ribbon-corner ribbon-fold">{{p.category}}</div>
       <div *ngIf="!p.public" class="ribbon-bookmark-h" data-tor="place.left place.top" title="Hidden"><i class="fa-solid fa-eye-slash"></i></div>
       <img class="card-img-top" alt="app-icon" src="{{p.icon}}">
       <div class="card-body">
-        <h5 class="card-title">{{p.name}}</h5>
+        <h5 class="card-title" id="{{p.name}}">{{p.name}}</h5>
         <p class="card-text">{{p.description}}</p>
         <a [routerLink]="['/app-details', p._id]" href="#" class="col-md-12 btn btn-primary">Meer details weergeven</a>
       </div>

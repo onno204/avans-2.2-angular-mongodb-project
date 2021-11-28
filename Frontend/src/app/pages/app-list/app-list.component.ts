@@ -33,6 +33,17 @@ export class AppListComponent implements OnInit {
     });
   }
 
+  getAllApps(cb: () => void): void {
+    this.page += 1;
+    this.rest.getAllApps().subscribe((res) => {
+      if (res.success) {
+        this.apps = res.data;
+        this.hasMore = false
+        cb();
+      }
+    });
+  }
+
   add(): void {
     this.router.navigate(['/app-add']);
   }
