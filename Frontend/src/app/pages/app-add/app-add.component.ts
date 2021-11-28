@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {RestService} from '../rest.service';
+import {AppApiService} from '../../services/app-api.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import Swal from 'sweetalert2';
 
@@ -19,7 +19,7 @@ export class AppAddComponent implements OnInit {
     icon: ""
   };
 
-  constructor(public rest: RestService, private route: ActivatedRoute, private router: Router) {
+  constructor(public rest: AppApiService, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit(): void {

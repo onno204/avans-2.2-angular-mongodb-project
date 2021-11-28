@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {RestService} from '../rest.service';
+import {AppApiService} from '../../services/app-api.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -15,7 +15,7 @@ export class AppListComponent implements OnInit {
   hasMore: Boolean = true;
 
   constructor(
-    public rest: RestService,
+    public rest: AppApiService,
     private router: Router) {
   }
 

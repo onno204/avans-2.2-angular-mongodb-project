@@ -24,7 +24,6 @@ app.use(bodyParser.json({limit: '50mb'}));
 app.get('/', (req, res) => res.send('Hello World for avans-app API'));
 app.use('/api/v1', require("./api-routes"))
 
-
 app.listen(serverPort, function () {
     console.log("Running avans-app API on http://127.0.0.1:" + serverPort);
 });
