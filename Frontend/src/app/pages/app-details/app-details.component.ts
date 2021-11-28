@@ -22,6 +22,7 @@ export class AppDetailsComponent implements OnInit {
     this.rest.getApp(this.route.snapshot.params['id']).subscribe(
       (res) => {
         this.appData = {...res.data}
+        this.getComments();
 
         if (this.route.snapshot.paramMap.get("updated")) {
           this.router.navigate(['/app-details/' + this.appData._id]);
@@ -43,7 +44,13 @@ export class AppDetailsComponent implements OnInit {
       appId: this.appData._id
     }).subscribe((res) => {
       if (res.success) {
-        this.router.navigate(['/app-details/' + res.data._id]);
+        Swal.fire({
+          title: 'Added!',
+          text: "Your comment has been added",
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        })
+        this.ngOnInit();
       } else {
         Swal.fire({
           title: 'Error!',
