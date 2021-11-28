@@ -107,6 +107,7 @@ describe('setTest', () => {
       // const subRouteSpy = spyOn(activatedRoute.paramMap, "subscribe");
       fixture_AppDetailsComponent.detectChanges();
       component_AppDetailsComponent.ngOnInit();
+      component_AppDetailsComponent.rest.deleteApp(targetTestData.testId);
 
       const fn = async () => {
         await fixture_AppDetailsComponent.whenStable();
