@@ -38,6 +38,7 @@ export class AppApiService {
   }
 
   addApp(app: any): Observable<any> {
+    console.log("endpoint", endpoint)
     return this.http.post(endpoint + 'apps', app).pipe(
       map(AppApiService.extractData),
       catchError(AppApiService.handleError)
