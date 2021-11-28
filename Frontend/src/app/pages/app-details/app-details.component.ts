@@ -70,6 +70,33 @@ export class AppDetailsComponent implements OnInit {
     });
   }
 
+  deleteComment(id: string): void {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete comment!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.comments.deleteComment(id).subscribe((res) => {
+          if (res.success) {
+            this.ngOnInit();
+          } else {
+            Swal.fire({
+              title: 'Error!',
+              html: res.data.message.replaceAll(".,", ".<br>"),
+              icon: 'error',
+              confirmButtonText: 'Ok'
+            })
+          }
+        });
+      }
+    });
+  }
+
   deleteApp(): void {
     Swal.fire({
       title: 'Are you sure?',

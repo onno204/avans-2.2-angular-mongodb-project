@@ -20,9 +20,10 @@
       <label class="form-label">Comment toevoegen</label>
       <input [(ngModel)]="comment" class="form-control" placeholder="Comment"/>
     </div>
-    <button (click)="addComment()" class="btn btn-primary">Add comment</button>
+    <button (click)="addComment()" class="btn btn-primary mb-3">Add comment</button>
     <div class="col-sm-12" *ngFor="let p of comments2; let i=index;">
-      <p class="card-text">{{p.username}}: {{p.comment}}</p>
+      <p><button (click)="deleteComment(p._id)" class="btn btn-danger">delete comment</button>{{p.username}}: {{p.comment}}</p>
+
     </div>
   </div>
 </div>
