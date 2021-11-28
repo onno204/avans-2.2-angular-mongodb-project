@@ -15,4 +15,11 @@
   <p>{{appData.description}}</p>
   <h4>Categorie</h4>
   <p>{{appData.category}}</p>
+  <div class="row">
+    <div class="mb-3">
+      <label class="form-label">Comment toevoegen</label>
+      <input [(ngModel)]="comment" class="form-control" placeholder="Comment"/>
+    </div>
+    <button (click)="addComment()" class="btn btn-primary">Add comment</button>
+  </div>
 </div>

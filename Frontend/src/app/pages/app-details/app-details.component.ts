@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AppApiService} from '../../services/app-api.service';
+import {CommentApiService} from '../../services/comments-api.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import Swal from 'sweetalert2';
 
@@ -10,8 +11,10 @@ import Swal from 'sweetalert2';
 })
 export class AppDetailsComponent implements OnInit {
   appData: any;
+  comment: String = "";
+  comments2: any = [];
 
-  constructor(public rest: AppApiService, private route: ActivatedRoute, private router: Router) {
+  constructor(public rest: AppApiService, public comments: CommentApiService, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -31,6 +34,33 @@ export class AppDetailsComponent implements OnInit {
         }
       }
     );
+  }
+
+  addComment(): void {
+    this.comments.addComment({
+      comment: this.comment,
+      username: "test username",
+      appId: this.appData._id
+    }).subscribe((res) => {
+      if (res.success) {
+        this.router.navigate(['/app-details/' + res.data._id]);
+      } else {
+        Swal.fire({
+          title: 'Error!',
+          html: res.data.message.replaceAll(".,", ".<br>"),
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        })
+      }
+    });
+  }
+
+  getComments(): void {
+    this.comments.getComments( this.appData._id).subscribe((res) => {
+      if (res.success) {
+        this.comments2 = res.data
+      }
+    });
   }
 
   deleteApp(): void {
