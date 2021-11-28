@@ -7,6 +7,8 @@ router.get('/', function (req, res) {
 });
 
 const appController = require('./Controllers/appController');
+const commentsController = require('./Controllers/commentsController');
+
 router.route('/apps')
     .get(appController.index)
     .post(appController.new);
@@ -16,6 +18,16 @@ router.route('/apps/:app_id')
     .patch(appController.update)
     .put(appController.update)
     .delete(appController.delete);
+
+router.route('/comments')
+    .get(commentsController.index)
+    .post(commentsController.new);
+
+router.route('/comments/:comment_id')
+    .get(commentsController.view)
+    .patch(commentsController.update)
+    .put(commentsController.update)
+    .delete(commentsController.delete);
 
 
 module.exports = router;
