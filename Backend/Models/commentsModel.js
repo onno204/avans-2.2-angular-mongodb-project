@@ -15,7 +15,7 @@ const commentsSchema = mongoose.Schema({
     },
 }, { timestamps: true });
 
-dbModel = module.exports = mongoose.model('app', commentsSchema);
+dbModel = module.exports = mongoose.model('comments', commentsSchema);
 
 // module.exports.get = function (callback, limit) {
 //     dbModel.find(callback).limit(limit);
