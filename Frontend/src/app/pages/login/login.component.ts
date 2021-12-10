@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     try {
       const token = JSON.parse(this.cookieService.get('token') || '[]');
-      console.log("token: ", token);
       if (token?.token?.length > 10) {
         this.router.navigate(['/']);
       }
@@ -31,9 +30,8 @@ export class LoginComponent implements OnInit {
 
   register(): void {
     this.users.register(this.data.email, this.data.password).subscribe((res) => {
-      console.log(res)
       if (res.success) {
-        this.cookieService.set('token', JSON.stringify(res.data));
+        this.set_cookie('token', JSON.stringify(res.data), '/')
         Swal.fire({
           title: 'Successfully registered',
           text: "You have successfully registered",
@@ -58,7 +56,7 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.users.login(this.data.email, this.data.password).subscribe((res) => {
       if (res.success) {
-        this.cookieService.set('token', JSON.stringify(res.data));
+        this.set_cookie('token', JSON.stringify(res.data), '/')
         Swal.fire({
           title: 'Successfully logged in',
           text: "You have successfully logged in",
@@ -78,6 +76,11 @@ export class LoginComponent implements OnInit {
         })
       }
     });
+  }
+
+  set_cookie(name: string, value: string, path: string): void {
+    document.cookie = name + "=" + value +";path=/" +
+      ";expires=Wed, 01 Jan 2070 00:00:01 GMT";
   }
 
 }

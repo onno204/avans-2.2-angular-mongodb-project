@@ -10,7 +10,7 @@
           <a class="nav-link" [routerLink]="['/apps']" [routerLinkActive]="['active']">Apps</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/app-add']" [routerLinkActive]="['active']">Create app</a>
+          <a class="nav-link" *ngIf="loggedIn" [routerLink]="['/app-add']" [routerLinkActive]="['active']">Create app</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/about']" [routerLinkActive]="['active']">About</a>

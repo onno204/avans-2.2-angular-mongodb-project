@@ -7,8 +7,8 @@
   </div>
   <div class="col-md-6">
     <p>Aangemaakt op {{appData.createdAt | date:'full'}}</p>
-    <a [routerLink]="['/app-update', appData._id]" class="col-md-4 btn btn-primary">App aanpassen</a>
-    <a  (click)="deleteApp()" style="float: right" class="col-md-4 btn btn-danger">App verwijderen</a>
+    <a [routerLink]="['/app-update', appData._id]" class="col-md-4 btn btn-primary" *ngIf="role === 'admin' || ownsApp">App aanpassen</a>
+    <a  (click)="deleteApp()" style="float: right" class="col-md-4 btn btn-danger" *ngIf="role === 'admin' || ownsApp">App verwijderen</a>
   </div>
 
   <h4 class="mt-4">Description</h4>
@@ -16,13 +16,13 @@
   <h4>Categorie</h4>
   <p>{{appData.category}}</p>
   <div class="row">
-    <div class="mb-3">
+    <div class="mb-3" *ngIf="loggedIn">
       <label class="form-label">Comment toevoegen</label>
       <input [(ngModel)]="comment" class="form-control" placeholder="Comment"/>
     </div>
-    <button (click)="addComment()" class="btn btn-primary mb-3">Add comment</button>
+    <button (click)="addComment()" class="btn btn-primary mb-3" *ngIf="loggedIn">Add comment</button>
     <div class="col-sm-12" *ngFor="let p of comments2; let i=index;">
-      <p><button (click)="deleteComment(p._id)" class="btn btn-danger">delete comment</button>{{p.username}}: {{p.comment}}</p>
+      <p><button (click)="deleteComment(p._id)" class="btn btn-danger"  *ngIf="role === 'admin'">delete comment</button>{{p.username}}: {{p.comment}}</p>
     </div>
   </div>
 </div>

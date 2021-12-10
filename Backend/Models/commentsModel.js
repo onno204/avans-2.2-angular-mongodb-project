@@ -11,7 +11,8 @@ const commentsSchema = mongoose.Schema({
     },
     appId: {
         type: String,
-        required: true
+        required: true,
+        index: 1
     },
 }, { timestamps: true });
 

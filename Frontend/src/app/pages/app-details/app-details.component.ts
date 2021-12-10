@@ -3,6 +3,7 @@ import {AppApiService} from '../../services/app-api.service';
 import {CommentApiService} from '../../services/comments-api.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import Swal from 'sweetalert2';
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'app-app-details',
@@ -14,11 +15,15 @@ export class AppDetailsComponent implements OnInit {
   comment: String = "";
   comments2: any = [];
 
-  constructor(public rest: AppApiService, public comments: CommentApiService, private route: ActivatedRoute, private router: Router) {
+  loggedIn: boolean = false;
+  ownsApp: boolean = false;
+  role: string = "";
+  email: string = "";
+
+  constructor(private cookieService: CookieService, public rest: AppApiService, public comments: CommentApiService, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit(): void {
-    console.log("params: ", this.route.snapshot.params)
     this.rest.getApp(this.route.snapshot.params['id']).subscribe(
       (res) => {
         this.appData = {...res.data}
@@ -35,6 +40,16 @@ export class AppDetailsComponent implements OnInit {
         }
       }
     );
+
+    try {
+      const token = JSON.parse(this.cookieService.get('token') || '[]');
+      if (token?.token?.length > 10) {
+        this.loggedIn = true;
+        this.role = token.role;
+        this.email = token.email;
+      }
+    } catch {
+    }
   }
 
   addComment(): void {

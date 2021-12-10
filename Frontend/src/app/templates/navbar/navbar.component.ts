@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
+import {Component, OnInit} from '@angular/core';
+import {CookieService} from 'ngx-cookie-service';
 import Swal from "sweetalert2";
 import {Router} from "@angular/router";
 
@@ -10,7 +10,8 @@ import {Router} from "@angular/router";
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private cookieService: CookieService, private router: Router) { }
+  constructor(private cookieService: CookieService, private router: Router) {
+  }
 
   role = "";
   email = "";
@@ -19,30 +20,39 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     try {
       const token = JSON.parse(this.cookieService.get('token') || '[]');
-      console.log("token: ", token);
       if (token?.token?.length > 10) {
         this.loggedIn = true;
         this.role = token.role;
         this.email = token.email;
       }
-    }catch { }
-
+    } catch {
+    }
   }
 
   logout(): void {
-    this.cookieService.delete('token');
+    this.delete_cookie('token', '/')
     Swal.fire({
       title: 'Successfully logged out',
       text: "You have successfully logged out",
       icon: 'success',
       showCancelButton: false,
       confirmButtonColor: '#5caa19',
-      confirmButtonText: 'Ok, take me to the homepage'
+      confirmButtonText: 'Ok'
     }).then((result) => {
-      this.router.navigate(['/']);
-      if (window.location.pathname === "/apps") {
-        window.location.reload();
-      }
+      window.location.reload();
+    });
+  }
+
+  delete_cookie(name: string, path: string): void {
+    if (this.get_cookie(name)) {
+      document.cookie = name + "=" +
+        ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+    }
+  }
+
+  get_cookie(name: string): boolean {
+    return document.cookie.split(';').some(c => {
+      return c.trim().startsWith(name + '=');
     });
   }
 }

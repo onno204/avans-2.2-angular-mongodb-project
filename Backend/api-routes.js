@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const jwt = require("jsonwebtoken");
 router.get('/', function (req, res) {
     res.json({
         success: false,
@@ -9,6 +10,25 @@ router.get('/', function (req, res) {
 const appController = require('./Controllers/appController');
 const commentsController = require('./Controllers/commentsController');
 const usersController = require('./Controllers/usersController');
+const key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ";
+
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1]
+
+    if (token == null || token.length === 0) return res.sendStatus(401)
+
+    jwt.verify(token, key, (err, user) => {
+        console.log(err)
+
+        if (err) return res.sendStatus(403)
+
+        req.user = user
+
+        next()
+    })
+}
+
 
 router.route('/login').post(usersController.login)
 router.route('/register').post(usersController.register)
@@ -19,30 +39,30 @@ router.route('/apps')
 
 router.route('/apps/:app_id')
     .get(appController.view)
-    .patch(appController.update)
-    .put(appController.update)
-    .delete(appController.delete);
+    .patch(authenticateToken, appController.update)
+    .put(authenticateToken, appController.update)
+    .delete(authenticateToken, appController.delete);
 
 router.route('/comments')
     .get(commentsController.index)
-    .post(commentsController.new);
+    .post(authenticateToken, commentsController.new);
 
 router.route('/comments/:comment_id')
     .get(commentsController.view)
-    .patch(commentsController.update)
-    .put(commentsController.update)
-    .delete(commentsController.delete);
+    .patch(authenticateToken, commentsController.update)
+    .put(authenticateToken, commentsController.update)
+    .delete(authenticateToken, commentsController.delete);
 
 
 router.route('/users')
-    .get(usersController.index)
-    .post(usersController.new);
+    .get(authenticateToken, usersController.index)
+    .post(authenticateToken, usersController.new);
 
 router.route('/users/:user_id')
-    .get(usersController.view)
-    .patch(usersController.update)
-    .put(usersController.update)
-    .delete(usersController.delete);
+    .get(authenticateToken, usersController.view)
+    .patch(authenticateToken, usersController.update)
+    .put(authenticateToken, usersController.update)
+    .delete(authenticateToken, usersController.delete);
 
 
 module.exports = router;
