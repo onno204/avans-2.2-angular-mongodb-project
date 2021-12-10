@@ -14,6 +14,9 @@ import { NavbarComponent } from './templates/navbar/navbar.component';
 import { AboutComponent } from './pages/about/about.component';
 import { AppUpdateComponent } from './pages/app-update/app-update.component';
 import { LoginComponent } from './pages/login/login.component';
+import { UsersComponent } from './pages/users/users.component';
+import { DevicesComponent } from './pages/devices/devices.component';
+import { AddDeviceComponent } from './pages/add-device/add-device.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { LoginComponent } from './pages/login/login.component';
     NavbarComponent,
     AboutComponent,
     AppUpdateComponent,
-    LoginComponent
+    LoginComponent,
+    UsersComponent,
+    DevicesComponent,
+    AddDeviceComponent
   ],
   imports: [
     BrowserModule,

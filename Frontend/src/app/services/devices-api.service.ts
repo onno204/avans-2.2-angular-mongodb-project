@@ -13,64 +13,50 @@ const endpoint = environment.apiUrl;
   providedIn: 'root'
 })
 
-export class UserApiService {
+export class DeviceApiService {
 
   constructor(private http: HttpClient, private cookieService: CookieService) {
   }
 
-  getUsers(): Observable<any> {
-    return this.http.get(endpoint + 'users', this.getHeader()).pipe(
-      map(UserApiService.extractData),
-      catchError(UserApiService.handleError)
+  getDevices(): Observable<any> {
+    return this.http.get(endpoint + 'devices', this.getHeader()).pipe(
+      map(DeviceApiService.extractData),
+      catchError(DeviceApiService.handleError)
     );
   }
 
-  getAllUsers(): Observable<any> {
-    return this.http.get(endpoint + 'users?nolimit=1', this.getHeader()).pipe(
-      map(UserApiService.extractData),
-      catchError(UserApiService.handleError)
+  getAllDevices(): Observable<any> {
+    return this.http.get(endpoint + 'devices?nolimit=1', this.getHeader()).pipe(
+      map(DeviceApiService.extractData),
+      catchError(DeviceApiService.handleError)
     );
   }
 
-  getUser(id: string): Observable<any> {
-    return this.http.get(endpoint + 'users/' + id, this.getHeader()).pipe(
-      map(UserApiService.extractData),
-      catchError(UserApiService.handleError)
+  getDevice(id: string): Observable<any> {
+    return this.http.get(endpoint + 'devices/' + id, this.getHeader()).pipe(
+      map(DeviceApiService.extractData),
+      catchError(DeviceApiService.handleError)
     );
   }
 
-  addUser(user: any): Observable<any> {
-    return this.http.post(endpoint + 'users', user, this.getHeader()).pipe(
-      map(UserApiService.extractData),
-      catchError(UserApiService.handleError)
+  addDevice(device: any): Observable<any> {
+    return this.http.post(endpoint + 'devices', device, this.getHeader()).pipe(
+      map(DeviceApiService.extractData),
+      catchError(DeviceApiService.handleError)
     );
   }
 
-  updateUser(id: string, user: Object): Observable<any> {
-    return this.http.put(endpoint + 'users/' + id, user, this.getHeader()).pipe(
-      map(UserApiService.extractData),
-      catchError(UserApiService.handleError)
+  updateDevice(id: string, device: Object): Observable<any> {
+    return this.http.put(endpoint + 'devices/' + id, device, this.getHeader()).pipe(
+      map(DeviceApiService.extractData),
+      catchError(DeviceApiService.handleError)
     );
   }
 
-  deleteUser(id: string): Observable<any> {
-    return this.http.delete(endpoint + 'users/' + id, this.getHeader()).pipe(
-      map(UserApiService.extractData),
-      catchError(UserApiService.handleError)
-    );
-  }
-
-  login(email: string, password: string): Observable<any> {
-    return this.http.post(endpoint + 'login', {email: email, password: password}, this.getHeader()).pipe(
-      map(UserApiService.extractData),
-      catchError(UserApiService.handleError)
-    );
-  }
-
-  register(email: string, password: string): Observable<any> {
-    return this.http.post(endpoint + 'register', {email: email, password: password}, this.getHeader()).pipe(
-      map(UserApiService.extractData),
-      catchError(UserApiService.handleError)
+  deleteDevice(id: string): Observable<any> {
+    return this.http.delete(endpoint + 'devices/' + id, this.getHeader()).pipe(
+      map(DeviceApiService.extractData),
+      catchError(DeviceApiService.handleError)
     );
   }
 
@@ -113,6 +99,9 @@ export class UserApiService {
     // console.error(error.status, error.error)
     if (error.error) {
       // return error.error
+      if (error.message !== undefined){
+        return of(error)
+      }
       return of(error.error)
     }
     return throwError('Something bad happened; please try again later.');

@@ -10,6 +10,8 @@ router.get('/', function (req, res) {
 const appController = require('./Controllers/appController');
 const commentsController = require('./Controllers/commentsController');
 const usersController = require('./Controllers/usersController');
+const devicesController = require('./Controllers/devicesController');
+
 const key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ";
 
 function authenticateToken(req, res, next) {
@@ -63,6 +65,16 @@ router.route('/users/:user_id')
     .patch(authenticateToken, usersController.update)
     .put(authenticateToken, usersController.update)
     .delete(authenticateToken, usersController.delete);
+
+router.route('/devices')
+    .get(authenticateToken, devicesController.index)
+    .post(authenticateToken, devicesController.new);
+
+router.route('/devices/:device_id')
+    .get(authenticateToken, devicesController.view)
+    .patch(authenticateToken, devicesController.update)
+    .put(authenticateToken, devicesController.update)
+    .delete(authenticateToken, devicesController.delete);
 
 
 module.exports = router;

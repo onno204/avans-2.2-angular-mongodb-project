@@ -10,10 +10,16 @@
           <a class="nav-link" [routerLink]="['/apps']" [routerLinkActive]="['active']">Apps</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" *ngIf="loggedIn" [routerLink]="['/app-add']" [routerLinkActive]="['active']">Create app</a>
+          <a class="nav-link" *ngIf="role === 'developer' || role === 'admin'" [routerLink]="['/app-add']" [routerLinkActive]="['active']">Create app</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/about']" [routerLinkActive]="['active']">About</a>
+        </li>
+        <li class="nav-item" *ngIf="role === 'admin'">
+          <a class="nav-link" [routerLink]="['/users']" [routerLinkActive]="['active']">Users</a>
+        </li>
+        <li class="nav-item" *ngIf="role === 'admin'">
+          <a class="nav-link" [routerLink]="['/devices']" [routerLinkActive]="['active']">Devices</a>
         </li>
         <li class="nav-item" *ngIf="!loggedIn">
           <a class="nav-link" [routerLink]="['/login']" [routerLinkActive]="['active']">Login</a>
