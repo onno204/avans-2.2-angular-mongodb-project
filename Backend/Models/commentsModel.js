@@ -9,6 +9,10 @@ const commentsSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    user_id: {
+        type: String,
+        required: true
+    },
     appId: {
         type: String,
         required: true,

@@ -28,14 +28,14 @@ exports.login = function (email, password, callback) {
         if (err || result === null) {
             return callback("User login failed", undefined);
         }
-        exports.generateNewToken(result.email, result.role, callback)
+        exports.generateNewToken(result.email, result.role, result._id, callback)
     });
 }
 
-exports.generateNewToken = function (email, role, callback) {
-    jwt.sign({user_email: email, role: role}, key, {expiresIn: '2h'}, (err, res) => {
+exports.generateNewToken = function (email, role, id, callback) {
+    jwt.sign({user_email: email, role: role, user_id: id}, key, {expiresIn: '2h'}, (err, res) => {
         if (err) return callback("Error while creating login token", undefined);
-        callback(undefined, {token: res, role: role, email: email});
+        callback(undefined, {token: res, role: role, email: email, user_id: id});
     });
 }
 

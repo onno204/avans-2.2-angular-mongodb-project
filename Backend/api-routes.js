@@ -27,13 +27,12 @@ function authenticateToken(req, res, next) {
     })
 }
 
-
 router.route('/login').post(usersController.login)
 router.route('/register').post(usersController.register)
 
 router.route('/apps')
     .get(appController.index)
-    .post(appController.new);
+    .post(authenticateToken, appController.new);
 
 router.route('/apps/:app_id')
     .get(appController.view)

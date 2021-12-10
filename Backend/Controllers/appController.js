@@ -26,6 +26,7 @@ exports.new = function (req, res) {
     for (const [key, value] of Object.entries(req.body)) {
         app[key] = value
     }
+    app.user_id = req.user.user_id
     // save the app and check for errors
     app.save(function (err) {
         if (err && Object.values(err).length > 0) {
@@ -68,6 +69,8 @@ exports.update = function (req, res) {
         for (const [key, value] of Object.entries(req.body)) {
             app[key] = value
         }
+
+        app.user_id = app.user_id ? app.user_id : req.user.user_id
 
         app.save(function (err) {
             if (err) {

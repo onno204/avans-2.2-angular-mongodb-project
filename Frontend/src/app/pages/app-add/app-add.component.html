@@ -23,5 +23,11 @@
     <input [(ngModel)]="appData.public" type="checkbox" class="form-check-input" id="publicCheckbox">
     <label class="form-check-label" for="publicCheckbox">Publicly visible</label>
   </div>
+  <div class="mb-3 form-check">
+    <label class="form-check-label" for="publicCheckbox">For what device is the app</label>
+    <select [(ngModel)]="appData.deviceName">
+      <option *ngFor="let role of devices">{{role}}</option>
+    </select>
+  </div>
   <button (click)="addApp()" class="btn btn-primary">Save</button>
 </div>

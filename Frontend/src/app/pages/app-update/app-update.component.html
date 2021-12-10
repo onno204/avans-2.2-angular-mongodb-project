@@ -19,6 +19,13 @@
     <label class="form-label">Category</label>
     <input [(ngModel)]="appData.category" class="form-control" placeholder="Communication"/>
   </div>
+
+  <div class="mb-3 form-check">
+    <label class="form-check-label" for="publicCheckbox">For what device is the app</label>
+    <select [(ngModel)]="appData.deviceName">
+      <option *ngFor="let role of devices" [selected]="role == appData.deviceName">{{role}}</option>
+    </select>
+  </div>
   <div class="mb-3 form-check">
     <input [(ngModel)]="appData.public" type="checkbox" class="form-check-input" id="publicCheckbox">
     <label class="form-check-label" for="publicCheckbox">Publicly visible</label>

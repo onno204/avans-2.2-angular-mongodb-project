@@ -21,6 +21,7 @@ exports.new = function (req, res) {
     for (const [key, value] of Object.entries(req.body)) {
         comment[key] = value
     }
+    comment.user_id = req.user.user_id
     // save the comment and check for errors
     comment.save(function (err) {
         if (err && Object.values(err).length > 0) {

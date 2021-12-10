@@ -10,6 +10,13 @@ const appSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    deviceName: {
+        type: String
+    },
+    user_id: {
+        type: String,
+        required: true
+    },
     category: {
         type: String,
         required: true

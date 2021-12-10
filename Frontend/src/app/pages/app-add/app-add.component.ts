@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {AppApiService} from '../../services/app-api.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import Swal from 'sweetalert2';
+import { DeviceApiService } from 'src/app/services/devices-api.service';
 
 @Component({
   selector: 'app-app-add',
@@ -16,13 +17,30 @@ export class AppAddComponent implements OnInit {
     description: "",
     category: "",
     public: false,
-    icon: ""
+    icon: "",
+    deviceName: ""
   };
 
-  constructor(public rest: AppApiService, private route: ActivatedRoute, private router: Router) {
+  devices: any[] = [];
+
+  constructor(public rest: AppApiService, public devicesApi: DeviceApiService, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit(): void {
+    this.devicesApi.getDevices().subscribe((res) => {
+      if (res.success) {
+        this.devices = res.data.map((data: any) => {
+          return data.name
+        });
+      } else {
+        Swal.fire({
+          title: 'Error!',
+          html: res.data.message.replaceAll(".,", ".<br>"),
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        })
+      }
+    });
   }
 
   handleFileSelect(evt: any){

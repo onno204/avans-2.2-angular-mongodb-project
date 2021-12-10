@@ -19,6 +19,7 @@ export class AppDetailsComponent implements OnInit {
   ownsApp: boolean = false;
   role: string = "";
   email: string = "";
+  user_id: string = "";
 
   constructor(private cookieService: CookieService, public rest: AppApiService, public comments: CommentApiService, private route: ActivatedRoute, private router: Router) {
   }
@@ -28,6 +29,20 @@ export class AppDetailsComponent implements OnInit {
       (res) => {
         this.appData = {...res.data}
         this.getComments();
+
+        try {
+          const token = JSON.parse(this.cookieService.get('token') || '[]');
+          if (token?.token?.length > 10) {
+            this.loggedIn = true;
+            this.role = token.role;
+            this.email = token.email;
+            this.user_id = token.user_id;
+            if (this.appData.user_id === this.user_id) {
+              this.ownsApp = true;
+            }
+          }
+        } catch {
+        }
 
         if (this.route.snapshot.paramMap.get("updated")) {
           this.router.navigate(['/app-details/' + this.appData._id]);
@@ -41,15 +56,6 @@ export class AppDetailsComponent implements OnInit {
       }
     );
 
-    try {
-      const token = JSON.parse(this.cookieService.get('token') || '[]');
-      if (token?.token?.length > 10) {
-        this.loggedIn = true;
-        this.role = token.role;
-        this.email = token.email;
-      }
-    } catch {
-    }
   }
 
   addComment(): void {
@@ -80,6 +86,12 @@ export class AppDetailsComponent implements OnInit {
   getComments(): void {
     this.comments.getComments( this.appData._id).subscribe((res) => {
       if (res.success) {
+        res.data.map((data: any) => {
+          if (data.user_id === this.user_id) {
+            data.ownsComment = true;
+          }
+          return data;
+        })
         this.comments2 = res.data
       }
     });

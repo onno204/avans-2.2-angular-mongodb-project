@@ -13,6 +13,8 @@
 
   <h4 class="mt-4">Description</h4>
   <p>{{appData.description}}</p>
+  <h4 class="mt-4">Device</h4>
+  <p>{{appData.deviceName}}</p>
   <h4>Categorie</h4>
   <p>{{appData.category}}</p>
   <div class="row">
@@ -22,7 +24,7 @@
     </div>
     <button (click)="addComment()" class="btn btn-primary mb-3" *ngIf="loggedIn">Add comment</button>
     <div class="col-sm-12" *ngFor="let p of comments2; let i=index;">
-      <p><button (click)="deleteComment(p._id)" class="btn btn-danger"  *ngIf="role === 'admin'">delete comment</button>{{p.username}}: {{p.comment}}</p>
+      <p><button (click)="deleteComment(p._id)" class="btn btn-danger" *ngIf="role === 'admin' || p.ownsComment">delete comment</button>{{p.username}}: {{p.comment}}</p>
     </div>
   </div>
 </div>
