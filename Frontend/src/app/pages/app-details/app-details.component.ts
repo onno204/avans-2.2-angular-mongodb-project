@@ -61,7 +61,7 @@ export class AppDetailsComponent implements OnInit {
   addComment(): void {
     this.comments.addComment({
       comment: this.comment,
-      username: "test username",
+      username: this.email,
       appId: this.appData._id
     }).subscribe((res) => {
       if (res.success) {
