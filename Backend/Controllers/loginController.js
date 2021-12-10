@@ -35,7 +35,7 @@ exports.login = function (email, password, callback) {
 exports.generateNewToken = function (email, role, callback) {
     jwt.sign({user_email: email, role: role}, key, {expiresIn: '2h'}, (err, res) => {
         if (err) return callback("Error while creating login token", undefined);
-        callback(undefined, {token: res, role: role});
+        callback(undefined, {token: res, role: role, email: email});
     });
 }
 
