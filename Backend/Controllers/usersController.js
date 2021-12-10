@@ -112,6 +112,12 @@ exports.login = function (req, res) {
 };
 
 exports.register = function (req, res) {
+    if (req.body.email.indexOf('@') === -1){
+        return res.status(400).json({
+            success: false,
+            data: "Email invalid format"
+        });
+    }
     loginController.add(req.body.email, req.body.password, (err, result) => {
         if (err) {
             return res.status(400).json({

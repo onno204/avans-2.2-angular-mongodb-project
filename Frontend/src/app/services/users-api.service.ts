@@ -110,6 +110,7 @@ export class UserApiService {
     }
     // console.error(error.status, error.error)
     if (error.error) {
+      console.log(error)
       // return error.error
       return of(error.error)
     }
