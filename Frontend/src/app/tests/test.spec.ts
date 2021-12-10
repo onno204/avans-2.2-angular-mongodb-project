@@ -83,7 +83,7 @@ describe('setTest', () => {
 
   describe('Create admin user', () => {
     it('Should create an admin user', (done) => {
-      userApi.register("test@test.com", "123").subscribe((res) => {
+      function continueFunction() {
         userApi.getUsers().subscribe((res2) => {
           let foundUser: any = null;
           if (res2.success){
@@ -103,9 +103,17 @@ describe('setTest', () => {
             done();
           });
         });
-      });
+      }
+      try {
+        userApi.register("test@test.com", "123").subscribe((res) => {
+          continueFunction()
+        });
+      }catch (e) {
+        continueFunction()
+      }
     });
   });
+
 
   describe('CRUD apps', () => {
     it('Filling form data and saving should create a new app', () => {
