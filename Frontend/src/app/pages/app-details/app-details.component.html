@@ -23,7 +23,6 @@
     <button (click)="addComment()" class="btn btn-primary mb-3">Add comment</button>
     <div class="col-sm-12" *ngFor="let p of comments2; let i=index;">
       <p><button (click)="deleteComment(p._id)" class="btn btn-danger">delete comment</button>{{p.username}}: {{p.comment}}</p>
-
     </div>
   </div>
 </div>

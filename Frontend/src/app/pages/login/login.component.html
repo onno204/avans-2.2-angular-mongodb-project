@@ -1,0 +1,14 @@
+<h1>Login</h1>
+<form>
+  <div class="mb-3">
+    <label class="form-label">Email</label>
+    <input [(ngModel)]="data.email" class="form-control" placeholder="Email" [ngModelOptions]="{standalone: true}">
+    <div class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Password</label>
+    <input [(ngModel)]="data.password" class="form-control" type="password" placeholder="Password" [ngModelOptions]="{standalone: true}">
+  </div>
+  <button (click)="login()" class="btn btn-primary">Login</button>
+  <button (click)="register()" class="btn btn-primary" style="float: right;">Register</button>
+</form>

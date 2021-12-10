@@ -8,6 +8,10 @@ router.get('/', function (req, res) {
 
 const appController = require('./Controllers/appController');
 const commentsController = require('./Controllers/commentsController');
+const usersController = require('./Controllers/usersController');
+
+router.route('/login').post(usersController.login)
+router.route('/register').post(usersController.register)
 
 router.route('/apps')
     .get(appController.index)
@@ -28,6 +32,17 @@ router.route('/comments/:comment_id')
     .patch(commentsController.update)
     .put(commentsController.update)
     .delete(commentsController.delete);
+
+
+router.route('/users')
+    .get(usersController.index)
+    .post(usersController.new);
+
+router.route('/users/:user_id')
+    .get(usersController.view)
+    .patch(usersController.update)
+    .put(usersController.update)
+    .delete(usersController.delete);
 
 
 module.exports = router;

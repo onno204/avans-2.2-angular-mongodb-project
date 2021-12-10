@@ -5,6 +5,7 @@ import {AppAddComponent} from '../pages/app-add/app-add.component';
 import {AppDetailsComponent} from '../pages/app-details/app-details.component';
 import {AppUpdateComponent} from '../pages/app-update/app-update.component';
 import {AboutComponent} from '../pages/about/about.component';
+import {LoginComponent} from '../pages/login/login.component';
 
 export const routes: Routes = [
   {path: 'about', component: AboutComponent},
@@ -12,6 +13,7 @@ export const routes: Routes = [
   {path: 'app-add', component: AppAddComponent},
   {path: 'app-details/:id', component: AppDetailsComponent},
   {path: 'app-update/:id', component: AppUpdateComponent},
+  {path: 'login', component: LoginComponent},
   {path: '', redirectTo: '/apps', pathMatch: 'full'}
 ];
 
@@ -20,7 +22,8 @@ export const components = [
   AppAddComponent,
   AppDetailsComponent,
   AppUpdateComponent,
-  AboutComponent
+  AboutComponent,
+  LoginComponent
 ]
 
 @NgModule({
