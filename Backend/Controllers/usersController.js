@@ -120,7 +120,7 @@ exports.register = function (req, res) {
     }
     loginController.add(req.body.email, req.body.password, (err, result) => {
         if (err) {
-            return res.status(400).json({
+            return res.status(202).json({
                 success: false,
                 data: err
             });
