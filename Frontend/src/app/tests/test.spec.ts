@@ -2,24 +2,29 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {FormsModule} from '@angular/forms';
 import {RouterTestingModule} from "@angular/router/testing";
 
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {AppListComponent} from '../pages/app-list/app-list.component';
 import {AppAddComponent} from '../pages/app-add/app-add.component';
 import {AppDetailsComponent} from '../pages/app-details/app-details.component';
 import {AppUpdateComponent} from '../pages/app-update/app-update.component';
-import {AboutComponent} from '../pages/about/about.component';
-import {NavbarComponent} from "../templates/navbar/navbar.component";
+import {UserApiService} from "../services/users-api.service";
 
 // import { ActivatedRouteStub } from './mock-activate-route';
 
 import {components, routes} from "../modules/app-routing.module"
 import { ActivatedRoute, Route, ActivatedRouteSnapshot, Params} from '@angular/router';
+import Swal from "sweetalert2";
 
 const targetTestData: any = {
   testId: Math.round(Math.random() * 1000000000),
-  createdId: undefined
+  createdId: undefined,
+  token: ""
 }
 
+function set_cookie(name: string, value: string, path: string): void {
+  document.cookie = name + "=" + value +";path=/" +
+    ";expires=Wed, 01 Jan 2070 00:00:01 GMT";
+}
 describe('setTest', () => {
   let component_AppAddComponent: AppAddComponent;
   let fixture_AppAddComponent: ComponentFixture<AppAddComponent>;
@@ -32,13 +37,15 @@ describe('setTest', () => {
 
   let component_AppUpdateComponent: AppUpdateComponent;
   let fixture_AppUpdateComponent: ComponentFixture<AppUpdateComponent>;
+  let userApi: UserApiService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule.withRoutes(routes), HttpClientModule, FormsModule],
       declarations: components.concat([AppAddComponent, AppListComponent, AppUpdateComponent, AppDetailsComponent]),
-      // providers: [{provide: ActivatedRoute, useClass: ActivatedRouteStub}]
+      providers: [UserApiService]
     }).compileComponents();
+    userApi = TestBed.get(UserApiService);
   });
 
   beforeEach(() => {
@@ -72,6 +79,32 @@ describe('setTest', () => {
     expect(component_AppAddComponent.appData.category).toBe('');
     expect(component_AppAddComponent.appData.public).toBe(false);
     expect(component_AppAddComponent.appData.icon).toBe('');
+  });
+
+  describe('Create admin user', () => {
+    it('Should create an admin user', (done) => {
+      userApi.register("test@test.com", "123").subscribe((res) => {
+        userApi.getUsers().subscribe((res2) => {
+          let foundUser: any = null;
+          if (res2.success){
+            Object.values(res2.data).forEach((user: any) => {
+              if (user.email === "test@test.com") {
+                foundUser = user;
+              }
+            })
+          }
+          expect(foundUser).not.toBeNull();
+          userApi.login("test@test.com", "123").subscribe((res) => {
+            if (res.success) {
+              targetTestData.token = res.data.token;
+            }
+            expect(targetTestData.token).not.toBe('');
+            set_cookie('token', JSON.stringify(res.data), '/')
+            done();
+          });
+        });
+      });
+    });
   });
 
   describe('CRUD apps', () => {
@@ -112,7 +145,6 @@ describe('setTest', () => {
       const fn = async () => {
         await fixture_AppDetailsComponent.whenStable();
         // await waitUntil(() =>)
-        console.log("appData:", component_AppDetailsComponent.appData)
         expect(component_AppDetailsComponent.appData).not.toBeUndefined();
         // expect(component_AppDetailsComponent.appData._id).toBe(targetTestData.createdId);
         done();
