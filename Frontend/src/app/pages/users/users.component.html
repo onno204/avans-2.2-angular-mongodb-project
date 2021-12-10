@@ -1,0 +1,26 @@
+<h2>Users</h2>
+
+
+<div class="row mt-2 text-center">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Email</th>
+      <th scope="col">Role</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let u of usersData; let i=index;">
+        <th scope="row">{{u._id}}</th>
+        <td>{{u.email}}</td>
+        <td>
+          <select id="role-{{u._id}}" (change)="changeRole(u._id)">
+            <option *ngFor="let role of roles" [selected]="role == u.role">{{role}}</option>
+          </select>
+          <a  (click)="deleteUser(u._id)" style="float: right" class="col-md-4 btn btn-danger" *ngIf="role === 'admin'">App verwijderen</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

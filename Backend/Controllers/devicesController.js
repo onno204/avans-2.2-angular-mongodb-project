@@ -1,8 +1,8 @@
-User = require('./../Models/usersModel');
+Device = require('./../Models/devicesModel');
 const loginController = require('./loginController');
 
 exports.index = function (req, res) {
-    User.find({}, function (err, req) {
+    Device.find({}, function (err, req) {
         if (err) {
             return res.status(400).json({
                 success: false,
@@ -17,12 +17,14 @@ exports.index = function (req, res) {
 };
 
 exports.new = function (req, res) {
-    const user = new User();
+    const device = new Device();
     for (const [key, value] of Object.entries(req.body)) {
-        user[key] = value
+        device[key] = value
     }
-    // save the user and check for errors
-    user.save(function (err) {
+    console.log("device: ", device)
+    // save the device and check for errors
+    device.save(function (err) {
+        console.log("err: ", err)
         if (err && Object.values(err).length > 0) {
             return res.status(400).json({
                 success: false,
@@ -31,13 +33,13 @@ exports.new = function (req, res) {
         }
         res.status(201).json({
             success: true,
-            data: user
+            data: device
         });
     });
 };
 
 exports.view = function (req, res) {
-    User.findById(req.params.user_id, function (err, user) {
+    Device.findById(req.params.device_id, function (err, device) {
         if (err) {
             return res.status(400).json({
                 success: false,
@@ -46,13 +48,13 @@ exports.view = function (req, res) {
         }
         res.status(200).json({
             success: true,
-            data: user
+            data: device
         });
     });
 };
 
 exports.update = function (req, res) {
-    User.findById(req.params.user_id, function (err, user) {
+    Device.findById(req.params.device_id, function (err, device) {
         if (err) {
             return res.status(400).json({
                 success: false,
@@ -61,10 +63,10 @@ exports.update = function (req, res) {
         }
         delete req.body._id;
         for (const [key, value] of Object.entries(req.body)) {
-            user[key] = value
+            device[key] = value
         }
 
-        user.save(function (err) {
+        device.save(function (err) {
             if (err) {
                 return res.status(400).json({
                     success: false,
@@ -73,16 +75,16 @@ exports.update = function (req, res) {
             }
             res.status(202).json({
                 success: true,
-                data: user
+                data: device
             });
         });
     });
 };
 
 exports.delete = function (req, res) {
-    User.remove({
-        _id: req.params.user_id
-    }, function (err, user) {
+    Device.remove({
+        _id: req.params.device_id
+    }, function (err, device) {
         if (err) {
             return res.status(400).json({
                 success: false,
@@ -91,37 +93,6 @@ exports.delete = function (req, res) {
         }
         res.status(202).json({
             success: true
-        });
-    });
-};
-
-
-exports.login = function (req, res) {
-    loginController.login(req.body.email, req.body.password, (err, result) => {
-        if (err) {
-            return res.status(401).json({
-                success: false,
-                data: err
-            });
-        }
-        res.status(200).json({
-            success: true,
-            data: result
-        });
-    });
-};
-
-exports.register = function (req, res) {
-    loginController.add(req.body.email, req.body.password, (err, result) => {
-        if (err) {
-            return res.status(400).json({
-                success: false,
-                data: err
-            });
-        }
-        res.status(200).json({
-            success: true,
-            data: result
         });
     });
 };

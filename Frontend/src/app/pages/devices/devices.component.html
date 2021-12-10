@@ -1,0 +1,28 @@
+<h2>Devices</h2>
+
+
+<div class="row mt-2 text-center">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let u of devicesData; let i=index;">
+      <th scope="row">{{u._id}}</th>
+      <td>{{u.name}}</td>
+      <td>
+        <a  (click)="deleteDevice(u._id)" style="float: right" class="col-md-4 btn btn-danger" *ngIf="role === 'admin'">Device verwijderen</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="row text-center">
+  <button (click)="addDevice()" class="col-md-12 mt-3 btn btn-primary">
+    Add a new device
+  </button>
+</div>
