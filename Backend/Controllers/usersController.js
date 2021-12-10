@@ -95,7 +95,6 @@ exports.delete = function (req, res) {
     });
 };
 
-
 exports.login = function (req, res) {
     loginController.login(req.body.email, req.body.password, (err, result) => {
         if (err) {
