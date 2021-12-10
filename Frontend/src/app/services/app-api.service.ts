@@ -83,12 +83,10 @@ export class AppApiService {
   }
 
   private static extractData(res: Object): any {
-    // console.log("incomming:", res)
     return res || {success: false, message: "unknown error"};
   }
 
   private static handleError(error: any): any {
-    console.log("error", error)
     if (error.status === 401) {
       Swal.fire({
         title: 'Error!',

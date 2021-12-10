@@ -43,7 +43,6 @@ export class UsersComponent implements OnInit {
 
   changeRole(id: string): void {
     const doc: any = document.getElementById("role-" + id);
-    console.log(doc.value);
     this.users.updateUser(id, {role: doc.value}).subscribe((res) => {
       if (res.success) {
         Swal.fire({

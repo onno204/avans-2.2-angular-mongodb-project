@@ -21,10 +21,8 @@ exports.new = function (req, res) {
     for (const [key, value] of Object.entries(req.body)) {
         device[key] = value
     }
-    console.log("device: ", device)
     // save the device and check for errors
     device.save(function (err) {
-        console.log("err: ", err)
         if (err && Object.values(err).length > 0) {
             return res.status(400).json({
                 success: false,

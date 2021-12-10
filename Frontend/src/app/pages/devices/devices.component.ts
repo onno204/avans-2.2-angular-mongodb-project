@@ -47,7 +47,6 @@ export class DevicesComponent implements OnInit {
 
   changeRole(id: string): void {
     const doc: any = document.getElementById("role-" + id);
-    console.log(doc.value);
     this.devices.updateDevice(id, {role: doc.value}).subscribe((res) => {
       if (res.success) {
         Swal.fire({
