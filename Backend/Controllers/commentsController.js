@@ -2,7 +2,7 @@ Comment = require('./../Models/commentsModel');
 
 exports.index = function (req, res) {
     const commentId = req.query.commentId || "";
-    Comment.find({commentId: commentId}, function (err, req) {
+    Comment.find({appId: commentId}, function (err, req) {
         if (err) {
             return res.status(400).json({
                 success: false,
