@@ -18,7 +18,7 @@
           <select id="role-{{u._id}}" (change)="changeRole(u._id)">
             <option *ngFor="let role of roles" [selected]="role == u.role">{{role}}</option>
           </select>
-          <a  (click)="deleteUser(u._id)" style="float: right" class="col-md-4 btn btn-danger" *ngIf="role === 'admin'">App verwijderen</a>
+          <a  (click)="deleteUser(u._id)" style="float: right" class="col-md-4 btn btn-danger" *ngIf="role === 'admin'">User verwijderen</a>
         </td>
       </tr>
     </tbody>
