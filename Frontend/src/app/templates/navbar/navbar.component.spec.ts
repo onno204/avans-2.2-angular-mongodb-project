@@ -11,7 +11,7 @@ describe('NavbarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule.withRoutes(routes)],
-      declarations: components.concat([NavbarComponent]),
+      declarations: components,
     })
       .compileComponents();
   });

@@ -52,7 +52,7 @@ router.route('/comments/:comment_id')
 
 
 router.route('/users')
-    .get(authenticateToken, usersController.index)
+    .get(usersController.index)
     .post(authenticateToken, usersController.new);
 
 router.route('/users/:user_id')
