@@ -77,7 +77,7 @@ export class UserApiService {
   private getHeader(): { headers: HttpHeaders } {
     let httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
+        'Content-Type': 'application/json',
       })
     };
     try {
@@ -85,11 +85,13 @@ export class UserApiService {
       if (token?.token?.length > 10) {
         httpOptions = {
           headers: new HttpHeaders({
-            'Content-Type':  'application/json',
-            'Authorization':  'Bearer ' + token.token
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token.token
           })
-        };      }
-    }catch { }
+        };
+      }
+    } catch {
+    }
     return httpOptions;
   }
 

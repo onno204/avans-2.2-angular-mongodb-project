@@ -63,7 +63,7 @@ export class CommentApiService {
   private getHeader(): { headers: HttpHeaders } {
     let httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
+        'Content-Type': 'application/json',
       })
     };
     try {
@@ -71,17 +71,19 @@ export class CommentApiService {
       if (token?.token?.length > 10) {
         httpOptions = {
           headers: new HttpHeaders({
-            'Content-Type':  'application/json',
-            'Authorization':  'Bearer ' + token.token
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token.token
           })
-        };      }
-    }catch { }
+        };
+      }
+    } catch {
+    }
     return httpOptions;
   }
 
   private static extractData(res: Object): any {
     // console.log("incomming:", res)
-    return res || { success: false, message: "unknown error" };
+    return res || {success: false, message: "unknown error"};
   }
 
   private static handleError(error: any): any {
