@@ -10,6 +10,7 @@ router.get('/', function (req, res) {
 const appController = require('./Controllers/appController');
 const commentsController = require('./Controllers/commentsController');
 const usersController = require('./Controllers/usersController');
+const userRelationsController = require('./Controllers/userRelationsController');
 const devicesController = require('./Controllers/devicesController');
 
 const key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ";
@@ -70,6 +71,13 @@ router.route('/devices/:device_id')
     .patch(authenticateToken, devicesController.update)
     .put(authenticateToken, devicesController.update)
     .delete(authenticateToken, devicesController.delete);
+
+
+router.route('/user/known_by').get(authenticateToken, userRelationsController.getKnownBy)
+router.route('/user/relations').get(authenticateToken, userRelationsController.getRelations)
+router.route('/user/relation/:user_id')
+    .post(authenticateToken, userRelationsController.addRelation)
+    .delete(authenticateToken, userRelationsController.removeRelation)
 
 
 module.exports = router;
