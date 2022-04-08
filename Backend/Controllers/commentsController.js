@@ -60,6 +60,16 @@ exports.update = function (req, res) {
                 data: err
             });
         }
+
+        if (comment.user_id !== req.user.user_id) {
+            return res.status(400).json({
+                success: false,
+                data: {
+                    message: 'Comment not owned by you'
+                }
+            });
+        }
+
         delete req.body._id;
         for (const [key, value] of Object.entries(req.body)) {
             comment[key] = value
@@ -81,17 +91,35 @@ exports.update = function (req, res) {
 };
 
 exports.delete = function (req, res) {
-    Comment.remove({
-        _id: req.params.comment_id
-    }, function (err, comment) {
-        if (err) {
+    Comment.findById(req.params.comment_id, function (err, comment) {
+        if (err || comment === null) {
             return res.status(400).json({
                 success: false,
                 data: err
             });
         }
-        res.status(202).json({
-            success: true
+
+        if (comment.user_id !== req.user.user_id) {
+            return res.status(400).json({
+                success: false,
+                data: {
+                    message: 'Comment not owned by you'
+                }
+            });
+        }
+
+        Comment.remove({
+            _id: req.params.comment_id
+        }, function (err, comment) {
+            if (err) {
+                return res.status(400).json({
+                    success: false,
+                    data: err
+                });
+            }
+            res.status(202).json({
+                success: true
+            });
         });
     });
 };

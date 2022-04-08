@@ -28,6 +28,14 @@ function authenticateToken(req, res, next) {
     })
 }
 
+function adminOnlyRoute(req, res, next) {
+    console.log("user", req.user);
+    if (req.user.role !== "admin") {
+        return res.sendStatus(403)
+    }
+    next();
+}
+
 router.route('/login').post(usersController.login)
 router.route('/register').post(usersController.register)
 
@@ -52,32 +60,33 @@ router.route('/comments/:comment_id')
     .delete(authenticateToken, commentsController.delete);
 
 
-router.route('/users')
-    .get(usersController.index)
-    .post(authenticateToken, usersController.new);
-
-router.route('/users/:user_id')
-    .get(authenticateToken, usersController.view)
-    .patch(authenticateToken, usersController.update)
-    .put(authenticateToken, usersController.update)
-    .delete(authenticateToken, usersController.delete);
-
-router.route('/devices')
-    .get(authenticateToken, devicesController.index)
-    .post(authenticateToken, devicesController.new);
-
-router.route('/devices/:device_id')
-    .get(authenticateToken, devicesController.view)
-    .patch(authenticateToken, devicesController.update)
-    .put(authenticateToken, devicesController.update)
-    .delete(authenticateToken, devicesController.delete);
-
-
 router.route('/user/known_by').get(authenticateToken, userRelationsController.getKnownBy)
 router.route('/user/relations').get(authenticateToken, userRelationsController.getRelations)
 router.route('/user/relation/:user_id')
     .post(authenticateToken, userRelationsController.addRelation)
     .delete(authenticateToken, userRelationsController.removeRelation)
+
+
+// Admin routes
+router.route('/users')
+    .get(authenticateToken, adminOnlyRoute, usersController.index)
+    .post(authenticateToken, adminOnlyRoute, usersController.new);
+
+router.route('/users/:user_id')
+    .get(authenticateToken, adminOnlyRoute, usersController.view)
+    .patch(authenticateToken, adminOnlyRoute, usersController.update)
+    .put(authenticateToken, adminOnlyRoute, usersController.update)
+    .delete(authenticateToken, adminOnlyRoute, usersController.delete);
+
+router.route('/devices')
+    .get(authenticateToken, devicesController.index)
+    .post(authenticateToken, adminOnlyRoute, devicesController.new);
+
+router.route('/devices/:device_id')
+    .get(authenticateToken, devicesController.view)
+    .patch(authenticateToken, adminOnlyRoute, devicesController.update)
+    .put(authenticateToken, adminOnlyRoute, devicesController.update)
+    .delete(authenticateToken, adminOnlyRoute, devicesController.delete);
 
 
 module.exports = router;

@@ -65,6 +65,15 @@ exports.update = function (req, res) {
                 data: err
             });
         }
+
+        if (app.user_id !== req.user.user_id) {
+            return res.status(400).json({
+                success: false,
+                data: {
+                    message: 'App not owned by you'
+                }
+            });
+        }
         delete req.body._id;
         for (const [key, value] of Object.entries(req.body)) {
             app[key] = value
@@ -88,17 +97,35 @@ exports.update = function (req, res) {
 };
 
 exports.delete = function (req, res) {
-    App.remove({
-        _id: req.params.app_id
-    }, function (err, app) {
-        if (err) {
+    App.findById(req.params.app_id, function (err, app) {
+        if (err || app === null) {
             return res.status(400).json({
                 success: false,
                 data: err
             });
         }
-        res.status(202).json({
-            success: true
+
+        if (app.user_id !== req.user.user_id) {
+            return res.status(400).json({
+                success: false,
+                data: {
+                    message: 'App not owned by you'
+                }
+            });
+        }
+
+        App.remove({
+            _id: req.params.app_id
+        }, function (err, app) {
+            if (err) {
+                return res.status(400).json({
+                    success: false,
+                    data: err
+                });
+            }
+            res.status(202).json({
+                success: true
+            });
         });
     });
 };
