@@ -2,7 +2,6 @@ User = require('./../Models/usersModel');
 Neos4JDriver = require('./../Driver/neo4jDriver');
 
 
-
 exports.addRelation = function (req, res) {
     User.findById(req.user.user_id, function (err, current_user) {
         if (err || current_user === null) {
@@ -45,7 +44,9 @@ exports.addRelation = function (req, res) {
 
             return res.status(400).json({
                 success: true,
-                message: 'relation created'
+                data: {
+                    message: 'relation created'
+                }
             });
         });
 
@@ -179,7 +180,9 @@ exports.removeRelation = function (req, res) {
 
             return res.status(400).json({
                 success: true,
-                message: 'relation deleted',
+                data: {
+                    message: 'relation deleted'
+                }
             });
         });
 
