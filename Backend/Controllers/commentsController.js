@@ -54,7 +54,7 @@ exports.view = function (req, res) {
 
 exports.update = function (req, res) {
     Comment.findById(req.params.comment_id, function (err, comment) {
-        if (err) {
+        if (err || comment === null) {
             return res.status(400).json({
                 success: false,
                 data: err

@@ -53,7 +53,7 @@ exports.view = function (req, res) {
 
 exports.update = function (req, res) {
     User.findById(req.params.user_id, function (err, user) {
-        if (err) {
+        if (err || user === null) {
             return res.status(400).json({
                 success: false,
                 data: err

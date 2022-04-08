@@ -53,7 +53,7 @@ exports.view = function (req, res) {
 
 exports.update = function (req, res) {
     Device.findById(req.params.device_id, function (err, device) {
-        if (err) {
+        if (err || device === null) {
             return res.status(400).json({
                 success: false,
                 data: err

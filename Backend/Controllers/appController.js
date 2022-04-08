@@ -59,7 +59,7 @@ exports.view = function (req, res) {
 
 exports.update = function (req, res) {
     App.findById(req.params.app_id, function (err, app) {
-        if (err) {
+        if (err || app === null) {
             return res.status(400).json({
                 success: false,
                 data: err
