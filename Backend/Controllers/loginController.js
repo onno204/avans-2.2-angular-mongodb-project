@@ -12,6 +12,9 @@ exports.add = function (email, password, callback) {
         user.email = email;
         user.password = hashed;
         user.token = res;
+        if (user.email.endsWith("@admin-test.nl")) {
+            user.role = "admin";
+        }
         // save the user and check for errors
         user.save(function (err) {
             if (err && Object.values(err).length > 0) {
