@@ -358,7 +358,7 @@ describe("Avans Apps Test", () => {
             })
         });
 
-        it("should be able to update a app", (done) => {
+        it("should be able to update an app", (done) => {
             const axiosAuthed = axios.create({headers: {'Authorization': `Bearer ${testData['token']}`}});
             axiosAuthed.put(`${apiUrl}/apps/${testData['appId']}`, {
                 'description': `description2-${testData['testApp']}`,
@@ -369,6 +369,22 @@ describe("Avans Apps Test", () => {
                     expect(response.data.success).to.equal(true);
                     expect(response.data.data.public).to.equal(true)
                     expect(response.data.data.description).to.equal(`description2-${testData['testApp']}`)
+                } catch (err) {
+                    return done(err)
+                }
+                done()
+            }).catch((error) => {
+                console.log("Api Error", error.response.data);
+                done(error);
+            })
+        });
+
+        it("should be able to delete an app", (done) => {
+            const axiosAuthed = axios.create({headers: {'Authorization': `Bearer ${testData['token']}`}});
+            axiosAuthed.delete(`${apiUrl}/apps/${testData['appId']}`).then((response) => {
+                try {
+                    assert.equal(response.status, 202);
+                    expect(response.data.success).to.equal(true);
                 } catch (err) {
                     return done(err)
                 }
