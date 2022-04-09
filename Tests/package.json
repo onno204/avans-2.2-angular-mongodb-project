@@ -1,0 +1,22 @@
+{
+  "name": "tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha index.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^9.2.2",
+    "request": "^2.88.2"
+  },
+  "dependencies": {
+    "assert": "^2.0.0",
+    "chai": "^4.3.6",
+    "axios": "^0.26.1",
+    "randomstring": "^1.2.2"
+  }
+}
