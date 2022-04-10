@@ -92,9 +92,14 @@ exports.getKnownBy = function (req, res) {
         })
 
         Promise.allSettled(promisList).then((result) => {
+            const resultList = [];
+            result.forEach(item => {
+                item.value.token = null;
+                resultList.push(item.value);
+            })
             return res.status(200).json({
                 success: true,
-                data: result
+                data: resultList
             });
         })
     });
@@ -138,9 +143,14 @@ exports.getRelations = function (req, res) {
             }))
         })
         Promise.allSettled(promisList).then((result) => {
+            const resultList = [];
+            result.forEach(item => {
+                item.value.token = null;
+                resultList.push(item.value);
+            })
             return res.status(200).json({
                 success: true,
-                data: result
+                data: resultList
             });
         })
 
