@@ -22,6 +22,7 @@ exports.new = function (req, res) {
         comment[key] = value
     }
     comment.user_id = req.user.user_id
+    comment.username = req.user.user_email
     // save the comment and check for errors
     comment.save(function (err) {
         if (err && Object.values(err).length > 0) {

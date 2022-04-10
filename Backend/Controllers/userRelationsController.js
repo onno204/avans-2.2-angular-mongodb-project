@@ -42,7 +42,7 @@ exports.addRelation = function (req, res) {
                 )
             })
 
-            return res.status(400).json({
+            return res.status(201).json({
                 success: true,
                 data: {
                     message: 'relation created'
@@ -92,7 +92,7 @@ exports.getKnownBy = function (req, res) {
         })
 
         Promise.allSettled(promisList).then((result) => {
-            return res.status(400).json({
+            return res.status(200).json({
                 success: true,
                 data: result
             });
@@ -138,7 +138,7 @@ exports.getRelations = function (req, res) {
             }))
         })
         Promise.allSettled(promisList).then((result) => {
-            return res.status(400).json({
+            return res.status(200).json({
                 success: true,
                 data: result
             });
@@ -178,7 +178,7 @@ exports.removeRelation = function (req, res) {
                 })
             )
 
-            return res.status(400).json({
+            return res.status(200).json({
                 success: true,
                 data: {
                     message: 'relation deleted'
